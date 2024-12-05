@@ -27,5 +27,4 @@ export class AxiosHelper {
   }
 }
 const backendURL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
-console.log(backendURL);
 new AxiosHelper(backendURL);
