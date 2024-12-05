@@ -8,13 +8,6 @@ import {
   GetDashboardTableDataParams,
 } from "../interfaces/building.interface";
 
-export const useGetBuildings = () => {
-  return useQuery("getAllBuildings", async () => {
-    const response = await AxiosHelper.instance.get("/buildings");
-    return response;
-  });
-};
-
 export const useGetBuildingIds = () => {
   type Response = Promise<string[]>;
   return useQuery(
