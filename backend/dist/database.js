@@ -7,6 +7,7 @@ exports.AppDataSource = void 0;
 const typeorm_1 = require("typeorm");
 const dotenv_1 = __importDefault(require("dotenv"));
 const path_1 = __importDefault(require("path"));
+const Building_1 = require("./entities/Building");
 dotenv_1.default.config();
 exports.AppDataSource = new typeorm_1.DataSource({
     type: "mongodb",
@@ -14,7 +15,7 @@ exports.AppDataSource = new typeorm_1.DataSource({
     url: process.env.DATABASE_URL,
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    entities: [path_1.default.join(__dirname, "./entities/*.js")],
+    entities: [Building_1.Building],
     migrations: [path_1.default.join(__dirname, "./migrations/*.js")],
     synchronize: true,
 });
