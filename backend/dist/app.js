@@ -10,7 +10,7 @@ const buildingController_1 = require("./controllers/buildingController");
 exports.app = (0, routing_controllers_2.createExpressServer)({
     controllers: [buildingController_1.BuildingController],
     cors: {
-        origin: "http://localhost:3000",
+        origin: "*",
         methods: ["GET", "POST", "PUT", "DELETE"],
         allowedHeaders: ["Content-Type", "Authorization"],
     },
