@@ -21,7 +21,7 @@ function getStartOfCurrentMonth() {
 interface MonthPickerProps {
   currentMonth: Date;
   onMonthChange: (newMonth: Date) => void;
-  minDate?: Date; // Eklenen minDate prop'u
+  minDate?: Date;
 }
 
 export default function MonthPicker({
@@ -40,12 +40,12 @@ export default function MonthPicker({
   });
 
   function previousYear() {
-    let firstDayNextYear = add(firstDayCurrentYear, { years: -1 });
+    const firstDayNextYear = add(firstDayCurrentYear, { years: -1 });
     setCurrentYear(format(firstDayNextYear, "yyyy"));
   }
 
   function nextYear() {
-    let firstDayNextYear = add(firstDayCurrentYear, { years: 1 });
+    const firstDayNextYear = add(firstDayCurrentYear, { years: 1 });
     setCurrentYear(format(firstDayNextYear, "yyyy"));
   }
 
@@ -113,10 +113,7 @@ export default function MonthPicker({
                       isEqual(month, getStartOfCurrentMonth()) &&
                       "bg-blue-100 text-blue-900 dark:bg-blue-800 dark:text-blue-50"
                   )}
-                  disabled={
-                    isFuture(month) || // Gelecekteki tarihleri devre dışı bırak
-                    (minDate && month < minDate) // minDate'den önceki ayları devre dışı bırak
-                  }
+                  disabled={isFuture(month) || (minDate && month < minDate)}
                   role="gridcell"
                   tabIndex={-1}
                   type="button"

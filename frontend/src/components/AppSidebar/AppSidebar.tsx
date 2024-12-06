@@ -1,14 +1,4 @@
-import {
-  Bell,
-  BriefcaseBusiness,
-  Building2,
-  ClipboardList,
-  Home,
-  Mails,
-  Map,
-  TriangleAlert,
-  Users,
-} from "lucide-react";
+import { Building2, Home } from "lucide-react";
 import {
   Sidebar,
   SidebarContent,

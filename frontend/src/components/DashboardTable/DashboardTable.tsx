@@ -1,4 +1,4 @@
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback } from "react";
 import { useRouter } from "next/router";
 import moment from "moment";
 import {
@@ -28,6 +28,7 @@ import {
   DropdownMenuTrigger,
 } from "@radix-ui/react-dropdown-menu";
 import { ChevronDown, CheckIcon, ChevronRight } from "lucide-react";
+import { DashboardTableData } from "@/api/interfaces/building.interface";
 
 const DashboardTable = () => {
   const [selectedMonth, setSelectedMonth] = useState<Date>(new Date());
@@ -46,51 +47,52 @@ const DashboardTable = () => {
     setMonthPickerOpen(false);
   }, []);
 
-  const columns: ColumnDef<any>[] = useMemo(
-    () => [
-      {
-        accessorKey: "id",
-        header: "ID",
-        cell: ({ row }) => <div>{row.getValue("id")}</div>,
+  const handleRowClick = (id: string) => {
+    router.push(`/buildings/${id}`);
+  };
+
+  const columns: ColumnDef<DashboardTableData>[] = [
+    {
+      accessorKey: "id",
+      header: "ID",
+      cell: ({ row }) => <div>{row.getValue("id")}</div>,
+    },
+    {
+      accessorKey: "name",
+      header: "Building Name",
+      cell: ({ row }) => <div>{row.getValue("name")}</div>,
+    },
+    {
+      accessorKey: "location",
+      header: "Location",
+      cell: ({ row }) => <div>{row.getValue("location")}</div>,
+    },
+    {
+      accessorKey: "consumption",
+      header: "Consumption",
+      cell: ({ row }) => {
+        const consumption = row.getValue("consumption") as number;
+        const formattedConsumption = new Intl.NumberFormat("tr-TR").format(
+          consumption
+        );
+        return <div>{`${formattedConsumption} m³`}</div>;
       },
-      {
-        accessorKey: "name",
-        header: "Building Name",
-        cell: ({ row }) => <div>{row.getValue("name")}</div>,
-      },
-      {
-        accessorKey: "location",
-        header: "Location",
-        cell: ({ row }) => <div>{row.getValue("location")}</div>,
-      },
-      {
-        accessorKey: "consumption",
-        header: "Consumption",
-        cell: ({ row }) => {
-          const consumption = row.getValue("consumption") as number;
-          const formattedConsumption = new Intl.NumberFormat("tr-TR").format(
-            consumption
-          );
-          return <div>{`${formattedConsumption} m³`}</div>;
-        },
-      },
-      {
-        id: "actions",
-        header: "Actions",
-        cell: ({ row }) => (
-          <Button
-            variant="ghost"
-            size="sm"
-            className="text-blue-600 hover:text-blue-800"
-            onClick={() => handleRowClick(row.original.id)}
-          >
-            <ChevronRight className="w-4 h-4" />
-          </Button>
-        ),
-      },
-    ],
-    []
-  );
+    },
+    {
+      id: "actions",
+      header: "Actions",
+      cell: ({ row }) => (
+        <Button
+          variant="ghost"
+          size="sm"
+          className="text-blue-600 hover:text-blue-800"
+          onClick={() => handleRowClick(row.original.id)}
+        >
+          <ChevronRight className="w-4 h-4" />
+        </Button>
+      ),
+    },
+  ];
 
   const table = useReactTable({
     data: data || [],
@@ -100,10 +102,6 @@ const DashboardTable = () => {
     state: { columnVisibility },
     onColumnVisibilityChange: setColumnVisibility,
   });
-
-  const handleRowClick = (id: string) => {
-    router.push(`/buildings/${id}`);
-  };
 
   return (
     <Card className="w-full p-2 sm:p-4">

@@ -1,6 +1,9 @@
 import { useRouter } from "next/router";
 import { useCallback } from "react";
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
+
 const useURLParams = () => {
   const router = useRouter();
 

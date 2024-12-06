@@ -1,4 +1,3 @@
-import { useGetBuildings } from "@/api/services/building.service";
 import { NextPage } from "next";
 import React from "react";
 import DashboardChart from "../DashboardChart/DashboardChart";

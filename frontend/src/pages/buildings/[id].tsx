@@ -3,20 +3,8 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { useGetBuildingDetails } from "@/api/services/building.service";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardFooter,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import {
-  ChartConfig,
-  ChartContainer,
-  ChartTooltip,
-  ChartTooltipContent,
-} from "@/components/ui/chart";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { ChartConfig, ChartContainer } from "@/components/ui/chart";
 import {
   Area,
   AreaChart,
@@ -72,9 +60,9 @@ const BuildingDetailsPage = ({
   const buildingName = data?.[0]?.name || "Unknown Building";
 
   // Chart Data
-  const chartData = data?.map((row: any) => ({
-    date: row.date,
-    consumption: row.consumption,
+  const chartData = data?.map((row) => ({
+    date: row.date as string,
+    consumption: row.consumption as string,
   }));
 
   const chartConfig: ChartConfig = {
@@ -91,7 +79,6 @@ const BuildingDetailsPage = ({
           <CardTitle>{buildingName}</CardTitle>
         </CardHeader>
         <CardContent>
-          {/* Grafik */}
           <div className="mb-6">
             <ChartContainer config={chartConfig} className="h-[200px] w-full">
               <AreaChart
@@ -143,7 +130,6 @@ const BuildingDetailsPage = ({
             </ChartContainer>
           </div>
 
-          {/* Tablo */}
           <div className="bg-white rounded-lg border border-spacing-1 shadow-lg">
             <Table>
               <TableHeader>
@@ -153,7 +139,7 @@ const BuildingDetailsPage = ({
                 </TableRow>
               </TableHeader>
               <TableBody>
-                {chartData.map((row: any, index: number) => (
+                {chartData.map((row, index: number) => (
                   <TableRow key={index}>
                     <TableCell>{row.date}</TableCell>
                     <TableCell>{`${row.consumption} m³`}</TableCell>
