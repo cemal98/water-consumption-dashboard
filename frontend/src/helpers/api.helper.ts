@@ -23,6 +23,6 @@ export const getError = (error: AxiosError): BackendError => {
   return {
     message: "Unknown error occurred",
     code: 100,
-    description: "",
+    description: "-",
   };
 };
