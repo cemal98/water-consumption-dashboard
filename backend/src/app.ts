@@ -9,10 +9,7 @@ useContainer(Container);
 export const app = createExpressServer({
   controllers: [BuildingController],
   cors: {
-    origin: [
-      "http://localhost:3000",
-      "https://water-consumption-dashboard-juu78e9cs-cemals-projects-1d23365a.vercel.app",
-    ],
+    origin: "*",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
   },
