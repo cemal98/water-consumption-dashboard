@@ -11,7 +11,7 @@ export const app = createExpressServer({
   cors: {
     origin: [
       "http://localhost:3000",
-      "https://water-consumption-dashboard-1r7d70tpi-cemals-projects-1d23365a.vercel.app/",
+      "https://water-consumption-dashboard-juu78e9cs-cemals-projects-1d23365a.vercel.app",
     ],
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type", "Authorization"],
